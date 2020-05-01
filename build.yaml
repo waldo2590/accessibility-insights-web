@@ -82,15 +82,7 @@ jobs:
             displayName: '(TEST) generate NOTICE.txt file'
             condition: and(succeeded(), eq(variables['GenerateReleaseNoticeFile'], 'true'))
             inputs:
-                outputfile: '$(System.DefaultWorkingDirectory)/src/NOTICE.txt'
-            timeoutInMinutes: 5
-
-          - task: msospo.ospo-extension.8d7f9abb-6896-461d-9e25-4f74ed65ddb2.notice@0
-            displayName: 'generate NOTICE.html file'
-            condition: and(succeeded(), eq(variables['GenerateReleaseNoticeFile'], 'true'))
-            inputs:
-                outputfile: '$(System.DefaultWorkingDirectory)/src/NOTICE.html'
-                outputformat: html
+                outputfile: 'NOTICE.txt'
             timeoutInMinutes: 5
 
           - script: yarn build:all
