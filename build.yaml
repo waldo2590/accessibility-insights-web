@@ -82,7 +82,7 @@ jobs:
             displayName: 'generate NOTICE.html file'
             condition: and(succeeded(), eq(variables['GenerateReleaseNoticeFile'], 'true'))
             inputs:
-                outputfile: '$(System.DefaultWorkingDirectory)/src/NOTICE.html'
+                outputfile: 'src/NOTICE.html'
                 outputformat: html
             timeoutInMinutes: 5
 
