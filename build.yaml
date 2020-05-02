@@ -82,7 +82,8 @@ jobs:
             displayName: 'generate NOTICE.txt file'
             condition: and(succeeded(), eq(variables['GenerateReleaseNoticeFile'], 'true'))
             inputs:
-                outputfile: '$(System.DefaultWorkingDirectory)/src/NOTICE.txt'
+                outputfile: 'NOTICE.html'
+                outputformat: html
             timeoutInMinutes: 5
 
           - script: yarn build:all
