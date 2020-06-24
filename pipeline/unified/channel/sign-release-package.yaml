@@ -38,9 +38,9 @@ jobs:
           - script: node ./pipeline/scripts/update-latest-yml.js signing-in-progress/${{ parameters.signedArtifactName }} ${{ parameters.platform }}
             displayName: update electron-builder latest.yml after signing
 
-          - ${{ if eq(parameters.platform, 'mac') }}:
-            - task: SFP.build-tasks.custom-build-task-1.EsrpCodeSigning@1
+          - task: SFP.build-tasks.custom-build-task-1.EsrpCodeSigning@1
             displayName: 'Send to ESRP Code Signing service for notarization'
+            condition: eq(parameters.platform, 'mac')
             inputs:
                 ConnectedServiceName: 'ESRP Code Signing'
                 FolderPath: '$(System.DefaultWorkingDirectory)/signing-in-progress/${{ parameters.signedArtifactName }}'
