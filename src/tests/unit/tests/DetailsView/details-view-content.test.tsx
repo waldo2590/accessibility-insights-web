@@ -154,6 +154,8 @@ describe(DetailsViewContent, () => {
                 bugService: 'gitHub',
                 bugServicePropertiesMap: { gitHub: { repository: 'gitHub-repository' } },
                 adbLocation: null,
+                lastWindowState: null,
+                lastWindowBounds: null,
             };
 
             const unifiedScanResultStoreData: UnifiedScanResultStoreData = {
@@ -219,7 +221,10 @@ describe(DetailsViewContent, () => {
             const rendered = shallow(
                 <DetailsViewContent
                     {...props}
-                    isNarrowMode={false}
+                    narrowModeStatus={{
+                        isHeaderAndNavCollapsed: false,
+                        isCommandBarCollapsed: false,
+                    }}
                     isSideNavOpen={false}
                     setSideNavOpen={() => {}}
                 />,

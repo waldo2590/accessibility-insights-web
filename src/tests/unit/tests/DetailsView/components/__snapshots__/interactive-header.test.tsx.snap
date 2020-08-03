@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`InteractiveHeader does render nav menu button if not in narrow mode 1`] = `
+exports[`InteractiveHeader render: isNavCollapsed equals false 1`] = `
 <Header
   deps={null}
   farItems={
@@ -9,26 +9,30 @@ exports[`InteractiveHeader does render nav menu button if not in narrow mode 1`]
       featureFlagData={null}
     />
   }
-  isNarrowMode={true}
-  items={
-    <FlaggedComponent
-      disableJSXElement={
-        <Switcher
-          deps={null}
-          pivotKey={2}
-          styles={
-            Object {
-              "dropdownClassName": "headerSwitcherDropdown",
-              "dropdownOptionClassName": "switcherDropdownOption",
-              "switcherClassName": "headerSwitcher",
-            }
-          }
-        />
-      }
-      enableJSXElement={null}
-      featureFlag="reflowUI"
-      featureFlagStoreData={null}
+  items={null}
+  narrowModeStatus={
+    Object {
+      "isHeaderAndNavCollapsed": false,
+    }
+  }
+  navMenu={null}
+/>
+`;
+
+exports[`InteractiveHeader render: isNavCollapsed equals true 1`] = `
+<Header
+  deps={null}
+  farItems={
+    <GearOptionsButtonComponent
+      deps={null}
+      featureFlagData={null}
     />
+  }
+  items={null}
+  narrowModeStatus={
+    Object {
+      "isHeaderAndNavCollapsed": true,
+    }
   }
   navMenu={
     <test-nav-menu
@@ -60,34 +64,11 @@ exports[`InteractiveHeader render: tabClosed equals false 1`] = `
       }
     />
   }
-  isNarrowMode={false}
-  items={
-    <FlaggedComponent
-      disableJSXElement={
-        <Switcher
-          deps={
-            Object {
-              "dropdownClickHandler": Object {},
-            }
-          }
-          pivotKey={2}
-          styles={
-            Object {
-              "dropdownClassName": "headerSwitcherDropdown",
-              "dropdownOptionClassName": "switcherDropdownOption",
-              "switcherClassName": "headerSwitcher",
-            }
-          }
-        />
-      }
-      enableJSXElement={null}
-      featureFlag="reflowUI"
-      featureFlagStoreData={
-        Object {
-          "test-flag": true,
-        }
-      }
-    />
+  items={null}
+  narrowModeStatus={
+    Object {
+      "isHeaderAndNavCollapsed": false,
+    }
   }
   navMenu={null}
 />
@@ -100,6 +81,10 @@ exports[`InteractiveHeader render: tabClosed equals true 1`] = `
       "dropdownClickHandler": Object {},
     }
   }
-  isNarrowMode={false}
+  narrowModeStatus={
+    Object {
+      "isHeaderAndNavCollapsed": false,
+    }
+  }
 />
 `;

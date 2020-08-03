@@ -7,16 +7,21 @@ import {
     AutomatedChecksViewSelectors,
     ScreenshotViewSelectors,
 } from 'tests/electron/common/element-identifiers/automated-checks-view-selectors';
-import { scanForAccessibilityIssues } from 'tests/electron/common/scan-for-accessibility-issues';
+import { scanForAccessibilityIssuesInAllModes } from 'tests/electron/common/scan-for-accessibility-issues';
 import { AppController } from 'tests/electron/common/view-controllers/app-controller';
 import { AutomatedChecksViewController } from 'tests/electron/common/view-controllers/automated-checks-view-controller';
+import { commonAdbConfigs, setupMockAdb } from 'tests/miscellaneous/mock-adb/setup-mock-adb';
 import { testResourceServerConfig } from '../setup/test-resource-server-config';
-
 describe('AutomatedChecksView', () => {
     let app: AppController;
     let automatedChecksView: AutomatedChecksViewController;
 
     beforeEach(async () => {
+        await setupMockAdb(
+            commonAdbConfigs['single-device'],
+            path.basename(__filename),
+            'beforeEach',
+        );
         app = await createApplication({ suppressFirstTimeDialog: true });
         automatedChecksView = await app.openAutomatedChecksView();
         await automatedChecksView.waitForScreenshotViewVisible();
@@ -72,16 +77,9 @@ describe('AutomatedChecksView', () => {
         await assertExpandedRuleGroup(3, 'TouchSizeWcag', 1);
     });
 
-    it.each([true, false])(
-        'should pass accessibility validation with highContrastMode=%s',
-        async highContrastMode => {
-            await app.setHighContrastMode(highContrastMode);
-            await app.waitForHighContrastMode(highContrastMode);
-
-            const violations = await scanForAccessibilityIssues(automatedChecksView);
-            expect(violations).toStrictEqual([]);
-        },
-    );
+    it('should pass accessibility validation in all contrast modes', async () => {
+        await scanForAccessibilityIssuesInAllModes(app);
+    });
 
     async function assertExpandedRuleGroup(
         position: number,

@@ -35,6 +35,7 @@ export class TabContextFactory {
         private visualizationConfigurationFactory: VisualizationConfigurationFactory,
         private telemetryEventHandler: TelemetryEventHandler,
         private targetTabController: TargetTabController,
+        private notificationCreator: NotificationCreator,
         private readonly promiseFactory: PromiseFactory,
         private readonly logger: Logger,
         private readonly usageLogger: UsageLogger,
@@ -114,6 +115,7 @@ export class TabContextFactory {
             interpreter,
             actionsHub.scanResultActions,
             this.telemetryEventHandler,
+            this.notificationCreator,
         );
         const contentActionCreator = new ContentActionCreator(
             interpreter,
@@ -132,7 +134,7 @@ export class TabContextFactory {
         );
 
         const injectorController = new InjectorController(
-            new ContentScriptInjector(browserAdapter, this.promiseFactory),
+            new ContentScriptInjector(browserAdapter, this.promiseFactory, this.logger),
             storeHub.visualizationStore,
             interpreter,
             storeHub.tabStore,

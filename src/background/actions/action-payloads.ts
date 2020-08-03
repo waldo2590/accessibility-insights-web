@@ -22,6 +22,8 @@ import {
 import { IssueFilingServiceProperties } from 'common/types/store-data/user-configuration-store';
 import { VisualizationType } from 'common/types/visualization-type';
 import { FailureInstanceData } from 'DetailsView/components/failure-instance-panel-control';
+import { Rectangle } from 'electron';
+import { WindowState } from 'electron/flux/types/window-state';
 import { TabStopEvent } from 'injected/tab-stops-listener';
 import { LaunchPanelType } from 'popup/components/popup-view';
 
@@ -183,6 +185,7 @@ export interface UnifiedScanCompletedPayload extends BaseActionPayload {
     scanIncompleteWarnings: ScanIncompleteWarningId[];
     screenshotData?: ScreenshotData;
     platformInfo?: PlatformData;
+    notificationText?: string;
 }
 
 export interface RuleExpandCollapsePayload extends BaseActionPayload {
@@ -203,3 +206,8 @@ export interface SetAllUrlsPermissionStatePayload extends BaseActionPayload {
 }
 
 export type ExistingTabUpdatedPayload = BaseActionPayload & Tab;
+
+export interface SaveWindowBoundsPayload extends BaseActionPayload {
+    windowState: WindowState;
+    windowBounds: Rectangle;
+}

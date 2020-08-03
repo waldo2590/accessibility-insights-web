@@ -30,16 +30,11 @@ yarn build:unified:all
 
 ### Running Locally
 
-Most of the functionality of Unified relies on connecting to a device running the Accessibility Insights for Android Service. However, most Unified development and testing does not require an actual Android device/VM; this repository comes with a `mock-service-for-android` that can be used to fake having one for most purposes.
+Most of the functionality of Unified relies on connecting to a device running the Accessibility Insights for Android Service. However, most Unified development and testing does not require an actual Android device/VM; this repository comes with `mock-adb` and `mock-service-for-android` tools that can be used to fake having one for most purposes.
 
-```sh
-# This is the command you'll want to use most of the time
-# In the app, use port 9051 for the mock service
-yarn with:mock-service-for-android start:unified:dev
+#### Using a mock device
 
-# You can leave off the :dev if you don't want the "inspect" window
-yarn with:mock-service-for-android start:unified
-```
+See guidance [here](../src/tests/miscellaneous/mock-adb/README.md).
 
 #### Connecting to a real device/emulator
 

@@ -12,6 +12,7 @@ export interface DeviceDescriptionProps extends DeviceInfo {
     currentApplication?: string;
 }
 
+export const deviceDescriptionAutomationId = 'device-description';
 export const DeviceDescription = NamedFC<DeviceDescriptionProps>('DeviceDescription', props => {
     const iconName: string = props.isEmulator ? 'Devices3' : 'CellPhone';
     const iconAriaLabel: string = props.isEmulator ? 'Emulator' : 'Device';
@@ -30,8 +31,16 @@ export const DeviceDescription = NamedFC<DeviceDescriptionProps>('DeviceDescript
     }
 
     return (
-        <div className={css(styles.content, props.className)}>
-            <Icon iconName={iconName} className={styles.iconContent} ariaLabel={iconAriaLabel} />
+        <div
+            className={css(styles.content, props.className)}
+            data-automation-id={deviceDescriptionAutomationId}
+        >
+            <Icon
+                iconName={iconName}
+                className={styles.iconContent}
+                ariaLabel={iconAriaLabel}
+                role="img"
+            />
             {descriptionAndApp}
         </div>
     );

@@ -9,20 +9,30 @@ export type PortFinder = (options?: PortFinderOptions) => Promise<number>;
 
 const servicePortNumber: number = 62442;
 
-export class AndroidServiceConfigurator {
+export interface ServiceConfigurator {
+    getConnectedDevices(): Promise<DeviceInfo[]>;
+    setSelectedDevice(deviceId: string): void;
+    hasRequiredServiceVersion(): Promise<boolean>;
+    installRequiredServiceVersion(): Promise<void>;
+    hasRequiredPermissions(): Promise<boolean>;
+    setupTcpForwarding(): Promise<number>;
+    removeTcpForwarding(hostPort: number): Promise<void>;
+}
+
+export class AndroidServiceConfigurator implements ServiceConfigurator {
     private readonly servicePackageName: string =
         'com.microsoft.accessibilityinsightsforandroidservice';
 
     private selectedDeviceId: string;
 
     public constructor(
-        private readonly adbWrapperMock: AdbWrapper,
+        private readonly adbWrapper: AdbWrapper,
         private readonly apkLocator: AndroidServiceApkLocator,
         private readonly portFinder: PortFinder,
     ) {}
 
     public getConnectedDevices = async (): Promise<DeviceInfo[]> => {
-        return await this.adbWrapperMock.getConnectedDevices();
+        return await this.adbWrapper.getConnectedDevices();
     };
 
     public setSelectedDevice = (deviceId: string): void => {
@@ -30,7 +40,7 @@ export class AndroidServiceConfigurator {
     };
 
     public hasRequiredServiceVersion = async (): Promise<boolean> => {
-        const installedVersion: string = await this.getInstalledVersion(this.selectedDeviceId);
+        const installedVersion = await this.getInstalledVersion(this.selectedDeviceId);
         if (installedVersion) {
             const targetVersion = (await this.apkLocator.locateBundledApk()).versionName;
             return installedVersion === targetVersion;
@@ -41,22 +51,22 @@ export class AndroidServiceConfigurator {
 
     public installRequiredServiceVersion = async (): Promise<void> => {
         const deviceId: string = this.selectedDeviceId; // Prevent changes during execution
-        const installedVersion: string = await this.getInstalledVersion(deviceId);
+        const installedVersion = await this.getInstalledVersion(deviceId);
         const apkInfo = await this.apkLocator.locateBundledApk();
         if (installedVersion) {
             const targetVersion: string = apkInfo.versionName;
             if (this.compareVersions(installedVersion, targetVersion) > 0) {
-                await this.adbWrapperMock.uninstallService(deviceId, this.servicePackageName);
+                await this.adbWrapper.uninstallService(deviceId, this.servicePackageName);
             }
         }
 
         const pathToApk = apkInfo.path;
-        await this.adbWrapperMock.installService(deviceId, pathToApk);
+        await this.adbWrapper.installService(deviceId, pathToApk);
     };
 
     public hasRequiredPermissions = async (): Promise<boolean> => {
         const deviceId: string = this.selectedDeviceId; // Prevent changes during execution
-        const accessibilityOutput: string = await this.adbWrapperMock.getDumpsysOutput(
+        const accessibilityOutput: string = await this.adbWrapper.getDumpsysOutput(
             deviceId,
             'accessibility',
         );
@@ -65,7 +75,7 @@ export class AndroidServiceConfigurator {
             return false;
         }
 
-        const mediaProjectionOutput: string = await this.adbWrapperMock.getDumpsysOutput(
+        const mediaProjectionOutput: string = await this.adbWrapper.getDumpsysOutput(
             deviceId,
             'media_projection',
         );
@@ -79,7 +89,7 @@ export class AndroidServiceConfigurator {
             stopPort: servicePortNumber + 100,
         });
 
-        return await this.adbWrapperMock.setTcpForwarding(
+        return await this.adbWrapper.setTcpForwarding(
             this.selectedDeviceId,
             hostPort,
             servicePortNumber,
@@ -87,11 +97,11 @@ export class AndroidServiceConfigurator {
     };
 
     public removeTcpForwarding = async (hostPort: number): Promise<void> => {
-        return await this.adbWrapperMock.removeTcpForwarding(this.selectedDeviceId, hostPort);
+        return await this.adbWrapper.removeTcpForwarding(this.selectedDeviceId, hostPort);
     };
 
-    private async getInstalledVersion(deviceId: string): Promise<string> {
-        const info: PackageInfo = await this.adbWrapperMock.getPackageInfo(
+    private async getInstalledVersion(deviceId: string): Promise<string | undefined> {
+        const info: PackageInfo = await this.adbWrapper.getPackageInfo(
             deviceId,
             this.servicePackageName,
         );

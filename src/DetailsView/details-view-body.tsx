@@ -2,12 +2,15 @@
 // Licensed under the MIT License.
 import { AssessmentsProvider } from 'assessments/types/assessments-provider';
 import * as classNames from 'classnames';
-import { FeatureFlags } from 'common/feature-flags';
 import { ScanIncompleteWarningId } from 'common/types/scan-incomplete-warnings';
 import { CardsViewModel } from 'common/types/store-data/card-view-model';
-import { ScanMetadata } from 'common/types/store-data/unified-data-interface';
+import {
+    ScanMetadata,
+    UnifiedScanResultStoreData,
+} from 'common/types/store-data/unified-data-interface';
 import { DetailsViewCommandBarProps } from 'DetailsView/components/details-view-command-bar';
 import { FluentSideNav, FluentSideNavDeps } from 'DetailsView/components/left-nav/fluent-side-nav';
+import { NarrowModeStatus } from 'DetailsView/components/narrow-mode-detector';
 import * as styles from 'DetailsView/details-view-body.scss';
 import { ISelection } from 'office-ui-fabric-react';
 import * as React from 'react';
@@ -63,33 +66,39 @@ export interface DetailsViewBodyProps {
     scanIncompleteWarnings: ScanIncompleteWarningId[];
     scanMetadata: ScanMetadata;
     isSideNavOpen: boolean;
-    setSideNavOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    isNarrowMode: boolean;
+    setSideNavOpen: (isOpen: boolean, event?: React.MouseEvent<any>) => void;
+    narrowModeStatus: NarrowModeStatus;
+    unifiedScanResultStoreData: UnifiedScanResultStoreData;
 }
 
 export class DetailsViewBody extends React.Component<DetailsViewBodyProps> {
     public render(): JSX.Element {
         const bodyLayoutClassName = classNames({
             'details-view-body-nav-content-layout': true,
-            'narrow-mode': this.props.isNarrowMode,
-            'reflow-ui': this.props.featureFlagStoreData[FeatureFlags.reflowUI],
+            'reflow-ui': true,
         });
 
         const bodyContentClassName = classNames({
             'details-view-body-content-pane': true,
+            'reflow-ui': true,
+        });
 
-            'reflow-ui': this.props.featureFlagStoreData[FeatureFlags.reflowUI],
+        const bodyContentContainerClassName = classNames(styles.detailsViewContentPaneContainer, {
+            [styles.narrowMode]: this.props.narrowModeStatus.isHeaderAndNavCollapsed,
+            'reflow-ui': true,
         });
 
         return (
             <div className={styles.detailsViewBody}>
-                {this.renderCommandBar()}
                 <div className={bodyLayoutClassName}>
                     {this.renderNavBar()}
-                    <div className={bodyContentClassName}>
-                        {this.getTargetPageHiddenBar()}
-                        <div className="view" role="main">
-                            {this.renderRightPanel()}
+                    <div className={bodyContentContainerClassName}>
+                        {this.renderCommandBar()}
+                        <div className={bodyContentClassName}>
+                            {this.getTargetPageHiddenBar()}
+                            <div className="view" role="main">
+                                {this.renderRightPanel()}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -114,7 +123,7 @@ export class DetailsViewBody extends React.Component<DetailsViewBodyProps> {
                 isSideNavOpen={this.props.isSideNavOpen}
                 setSideNavOpen={this.props.setSideNavOpen}
                 onRightPanelContentSwitch={() => this.props.setSideNavOpen(false)}
-                isNarrowMode={this.props.isNarrowMode}
+                narrowModeStatus={this.props.narrowModeStatus}
                 {...this.props}
             />
         );

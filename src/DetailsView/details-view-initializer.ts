@@ -45,7 +45,6 @@ import { ReportGenerator } from 'reports/report-generator';
 import { ReportHtmlGenerator } from 'reports/report-html-generator';
 import { WebReportNameGenerator } from 'reports/report-name-generator';
 import { UAParser } from 'ua-parser-js';
-
 import { A11YSelfValidator } from '../common/a11y-self-validator';
 import { AutoChecker } from '../common/auto-checker';
 import { AxeInfo } from '../common/axe-info';
@@ -117,7 +116,6 @@ import { NavLinkHandler } from './components/left-nav/nav-link-handler';
 import { DetailsViewContainerDeps, DetailsViewContainerState } from './details-view-container';
 import { DetailsViewRenderer } from './details-view-renderer';
 import { DocumentTitleUpdater } from './document-title-updater';
-import { detailsViewExtensionPoint } from './extensions/details-view-extension-point';
 import { AssessmentInstanceTableHandler } from './handlers/assessment-instance-table-handler';
 import { DetailsViewToggleClickHandlerFactory } from './handlers/details-view-toggle-click-handler-factory';
 import { MasterCheckBoxConfigProvider } from './handlers/master-checkbox-config-provider';
@@ -130,13 +128,13 @@ const browserAdapterFactory = new BrowserAdapterFactory(userAgentParser);
 const browserAdapter = browserAdapterFactory.makeFromUserAgent();
 
 const urlParser = new UrlParser();
-const tabId = urlParser.getIntParam(window.location.href, 'tabId');
+const tabId: number | null = urlParser.getIntParam(window.location.href, 'tabId');
 const dom = document;
 const documentElementSetter = new DocumentManipulator(dom);
 
 initializeFabricIcons();
 
-if (isNaN(tabId) === false) {
+if (tabId != null) {
     browserAdapter.getTab(
         tabId,
         (tab: Tab): void => {
@@ -457,7 +455,6 @@ if (isNaN(tabId) === false) {
                 scopingFlagsHandler,
                 Assessments,
                 assessmentViewUpdateHandler,
-                detailsViewExtensionPoint,
                 navLinkRenderer,
             };
 

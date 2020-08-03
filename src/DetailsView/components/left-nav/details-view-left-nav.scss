@@ -9,15 +9,15 @@
         li {
             :global {
                 .is-selected {
-                    background-color: $communication-tint-20;
+                    background-color: $nav-link-selected;
                     a,
                     button {
-                        background-color: $communication-tint-20 !important;
+                        background-color: $nav-link-selected !important;
                     }
                 }
                 .is-expanded,
                 .is-expanded + ul {
-                    background-color: $communication-tint-40;
+                    background-color: $nav-link-expanded;
                     .index-circle {
                         color: $neutral-0;
                         background: $index-circle-background;
@@ -29,7 +29,7 @@
             > div:hover {
                 a,
                 button {
-                    background-color: $nav-link-hover !important;
+                    background-color: $nav-link-hover;
                 }
             }
         }
@@ -41,6 +41,11 @@
         max-height: calc(100vh - (#{$detailsViewTotalHeaderHeight}));
         height: calc(100vh - (#{$detailsViewTotalHeaderHeight}));
     }
+
+    &:global(.reflow-ui) .left-nav {
+        max-height: calc(100vh - (#{$detailsViewHeaderBarHeight}));
+        height: calc(100vh - (#{$detailsViewHeaderBarHeight}));
+    }
 }
 
 .left-nav {
@@ -49,7 +54,7 @@
     z-index: 100;
     background-color: $neutral-0;
     :global {
-        .dark-gray {
+        .left-nav-icon {
             color: $neutral-60;
         }
         .ms-Nav-groupContent {
@@ -97,7 +102,6 @@
                 border-left: $pivotItemLeftBorderWidth $pivotItemBorderStyle $neutral-0;
                 border-top: 0px;
                 border-bottom: 0px;
-                text-align: center;
             }
             .ms-Button-label {
                 color: $neutral-100;
@@ -106,6 +110,7 @@
                 color: $secondary-text;
                 background: $neutral-0;
                 border-color: $neutral-20;
+                text-align: center;
             }
             &.is-selected {
                 a,
@@ -113,12 +118,12 @@
                     background-color: $communication-tint-40;
                     border-left: $pivotItemLeftBorderWidth $pivotItemBorderStyle
                         $communication-primary;
-                    .ms-Button-label {
+                    .ms-Button-label,
+                    .overview-percent {
                         color: $highlighted-text;
                     }
-                    .overview-percent,
-                    .dark-gray {
-                        color: $overview-percent-selected;
+                    .left-nav-icon {
+                        color: $left-nav-icon;
                     }
                 }
                 a::after,

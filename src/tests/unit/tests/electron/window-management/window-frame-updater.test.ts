@@ -32,6 +32,12 @@ describe(WindowFrameUpdater, () => {
             testSubject.initialize();
         });
 
+        it('invokes enterFullScreen', () => {
+            ipcRendererShimMock.setup(b => b.enterFullScreen()).verifiable(Times.once());
+
+            windowFrameActions.enterFullScreen.invoke(null);
+        });
+
         it('invokes maximize', () => {
             ipcRendererShimMock.setup(b => b.maximizeWindow()).verifiable(Times.once());
 
@@ -48,12 +54,6 @@ describe(WindowFrameUpdater, () => {
             ipcRendererShimMock.setup(b => b.restoreWindow()).verifiable(Times.once());
 
             windowFrameActions.restore.invoke(null);
-        });
-
-        it('invokes close', () => {
-            ipcRendererShimMock.setup(b => b.closeWindow()).verifiable(Times.once());
-
-            windowFrameActions.close.invoke(null);
         });
 
         it('invokes setSizeAndCenter', () => {

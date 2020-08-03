@@ -1,18 +1,25 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-import { IpcRenderer, OpenDialogOptions, OpenDialogReturnValue } from 'electron';
-import { SetSizePayload } from 'electron/flux/action/window-frame-actions-payloads';
+import { IpcRenderer, OpenDialogOptions, OpenDialogReturnValue, Rectangle } from 'electron';
 import {
+    SetSizePayload,
+    WindowBoundsChangedPayload,
+} from 'electron/flux/action/window-frame-actions-payloads';
+import {
+    IPC_FROMBROWSERWINDOW_CLOSE_CHANNEL_NAME,
     IPC_FROMBROWSERWINDOW_ENTERFULLSCREEN_CHANNEL_NAME,
     IPC_FROMBROWSERWINDOW_MAXIMIZE_CHANNEL_NAME,
     IPC_FROMBROWSERWINDOW_UNMAXIMIZE_CHANNEL_NAME,
+    IPC_FROMBROWSERWINDOW_WINDOWBOUNDSCHANGED_CHANNEL_NAME,
     IPC_FROMRENDERER_CLOSE_BROWSERWINDOW_CHANNEL_NAME,
+    IPC_FROMRENDERER_FULL_SCREEN_BROWSER_WINDOW_CHANNEL_NAME,
     IPC_FROMRENDERER_GET_APP_PATH_CHANNEL_NAME,
     IPC_FROMRENDERER_MAIN_WINDOW_INITIALIZED_CHANNEL_NAME,
     IPC_FROMRENDERER_MAXIMIZE_BROWSER_WINDOW_CHANNEL_NAME,
     IPC_FROMRENDERER_MINIMIZE_BROWSER_WINDOW_CHANNEL_NAME,
     IPC_FROMRENDERER_RESTORE_BROWSER_WINDOW_CHANNEL_NAME,
     IPC_FROMRENDERER_SETSIZEANDCENTER_BROWSER_WINDOW_CHANNEL_NAME,
+    IPC_FROMRENDERER_SETWINDOWBOUNDS_BROWSER_WINDOW_CHANNEL_NAME,
     IPC_FROMRENDERER_SHOW_OPEN_FILE_DIALOG,
 } from 'electron/ipc/ipc-channel-names';
 import { IpcRendererShim } from 'electron/ipc/ipc-renderer-shim';
@@ -38,6 +45,8 @@ describe(IpcRendererShim, () => {
             IPC_FROMBROWSERWINDOW_ENTERFULLSCREEN_CHANNEL_NAME,
             IPC_FROMBROWSERWINDOW_MAXIMIZE_CHANNEL_NAME,
             IPC_FROMBROWSERWINDOW_UNMAXIMIZE_CHANNEL_NAME,
+            IPC_FROMBROWSERWINDOW_CLOSE_CHANNEL_NAME,
+            IPC_FROMBROWSERWINDOW_WINDOWBOUNDSCHANGED_CHANNEL_NAME,
         ];
 
         let ipcHandlers;
@@ -64,17 +73,41 @@ describe(IpcRendererShim, () => {
             expect(callCount).toBe(1);
         });
 
-        it('invoke fromBrowserWindowMaximize action  maximize message from browser', () => {
+        it('invoke fromBrowserWindowMaximize on maximize message from browser', () => {
             let callCount = 0;
             testSubject.fromBrowserWindowMaximize.addListener(() => callCount++);
             ipcHandlers[IPC_FROMBROWSERWINDOW_MAXIMIZE_CHANNEL_NAME]();
             expect(callCount).toBe(1);
         });
 
-        it('invoke fromBrowserWindowUnmaximize  on unmaximize message from browser', () => {
+        it('invoke fromBrowserWindowUnmaximize on unmaximize message from browser', () => {
             let callCount = 0;
             testSubject.fromBrowserWindowUnmaximize.addListener(() => callCount++);
             ipcHandlers[IPC_FROMBROWSERWINDOW_UNMAXIMIZE_CHANNEL_NAME]();
+            expect(callCount).toBe(1);
+        });
+
+        it('invoke fromBrowserWindowWindowBoundsChanged on windowBoundsChanged message from browser', () => {
+            const payload: WindowBoundsChangedPayload = {
+                windowState: 'normal',
+                windowBounds: { x: 1, y: 2, width: 100, height: 200 },
+            };
+            let callCount = 0;
+            testSubject.fromBrowserWindowWindowBoundsChanged.addListener(() => callCount++);
+            ipcHandlers[IPC_FROMBROWSERWINDOW_WINDOWBOUNDSCHANGED_CHANNEL_NAME](payload);
+            expect(callCount).toBe(1);
+        });
+
+        it('invoke fromBrowserWindowClose on close message from browser, calls closeWindow, is async', async () => {
+            let callCount = 0;
+            ipcRendererMock
+                .setup(m => m.send(IPC_FROMRENDERER_CLOSE_BROWSERWINDOW_CHANNEL_NAME))
+                .verifiable(Times.once());
+            testSubject.fromBrowserWindowClose.addAsyncListener(() => {
+                callCount++;
+                return Promise.resolve();
+            });
+            await ipcHandlers[IPC_FROMBROWSERWINDOW_CLOSE_CHANNEL_NAME]();
             expect(callCount).toBe(1);
         });
 
@@ -83,6 +116,13 @@ describe(IpcRendererShim, () => {
                 .setup(b => b.send(IPC_FROMRENDERER_MAIN_WINDOW_INITIALIZED_CHANNEL_NAME))
                 .verifiable(Times.once());
             testSubject.initializeWindow();
+        });
+
+        it('enterFullScreen sends correct ipc message', () => {
+            ipcRendererMock
+                .setup(b => b.send(IPC_FROMRENDERER_FULL_SCREEN_BROWSER_WINDOW_CHANNEL_NAME))
+                .verifiable(Times.once());
+            testSubject.enterFullScreen();
         });
 
         it('maximizeWindow sends correct ipc message', () => {
@@ -134,6 +174,25 @@ describe(IpcRendererShim, () => {
             testSubject.setSizeAndCenterWindow({ height: expectedHeight, width: expectedWidth });
             expect(actualHeight).toBe(expectedHeight);
             expect(actualWidth).toBe(expectedWidth);
+        });
+
+        it('setWindowBounds sends correct ipc message with correct payload', () => {
+            const expectedBounds: Rectangle = { x: 40, y: 30, width: 200, height: 100 };
+            let actualBounds: Rectangle = null;
+
+            ipcRendererMock
+                .setup(b =>
+                    b.send(
+                        IPC_FROMRENDERER_SETWINDOWBOUNDS_BROWSER_WINDOW_CHANNEL_NAME,
+                        It.isAny(),
+                    ),
+                )
+                .callback((_: string, args: Rectangle) => {
+                    actualBounds = args;
+                })
+                .verifiable(Times.once());
+            testSubject.setWindowBounds(expectedBounds);
+            expect(actualBounds).toStrictEqual(expectedBounds);
         });
 
         describe('getAppPath', () => {

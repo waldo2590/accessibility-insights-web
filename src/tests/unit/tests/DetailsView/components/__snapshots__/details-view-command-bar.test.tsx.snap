@@ -1,5 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`DetailsViewCommandBar renders with buttons collapsed into a menu 1`] = `
+"<div className=\\"detailsViewCommandBar\\">
+  <div className=\\"detailsViewTargetPage\\" aria-labelledby=\\"switch-to-target\\">
+    <span id=\\"switch-to-target\\">
+      Target page: 
+    </span>
+    <StyledTooltipHostBase content=\\"Switch to target page: command-bar-test-tab-title\\" styles={{...}}>
+      <StyledLinkBase role=\\"link\\" className=\\"insights-link targetPageLink\\" onClick={[Function: proxy]} aria-label=\\"Switch to target page: command-bar-test-tab-title\\">
+        <span className=\\"targetPageTitle\\">
+          command-bar-test-tab-title
+        </span>
+      </StyledLinkBase>
+    </StyledTooltipHostBase>
+  </div>
+  <CommandBarButtonsMenu deps={{...}} tabStoreData={{...}} switcherNavConfiguration={{...}} scanMetadata={{...}} narrowModeStatus={{...}} renderExportReportButton={[Function]} buttonRef={[Function: buttonRef]} />
+</div>"
+`;
+
 exports[`DetailsViewCommandBar renders with export button, with start over 1`] = `
 "<div className=\\"detailsViewCommandBar\\">
   <div className=\\"detailsViewTargetPage\\" aria-labelledby=\\"switch-to-target\\">
@@ -7,18 +25,21 @@ exports[`DetailsViewCommandBar renders with export button, with start over 1`] =
       Target page: 
     </span>
     <StyledTooltipHostBase content=\\"Switch to target page: command-bar-test-tab-title\\" styles={{...}}>
-      <StyledLinkBase role=\\"link\\" className=\\"insights-link target-page-link\\" onClick={[Function: proxy]} aria-label=\\"Switch to target page: command-bar-test-tab-title\\">
-        command-bar-test-tab-title
+      <StyledLinkBase role=\\"link\\" className=\\"insights-link targetPageLink\\" onClick={[Function: proxy]} aria-label=\\"Switch to target page: command-bar-test-tab-title\\">
+        <span className=\\"targetPageTitle\\">
+          command-bar-test-tab-title
+        </span>
       </StyledLinkBase>
     </StyledTooltipHostBase>
   </div>
   <div className=\\"detailsViewCommandButtons\\">
-    <CustomizedActionButton>
-      Report Export Component
-    </CustomizedActionButton>
+    <ReportExportButton showReportExportDialog={[Function]} buttonRef={[Function: buttonRef]} />
     <CustomizedActionButton>
       Start Over Component
     </CustomizedActionButton>
+  </div>
+  <div>
+    Export dialog
   </div>
 </div>"
 `;
@@ -30,15 +51,41 @@ exports[`DetailsViewCommandBar renders with export button, without start over 1`
       Target page: 
     </span>
     <StyledTooltipHostBase content=\\"Switch to target page: command-bar-test-tab-title\\" styles={{...}}>
-      <StyledLinkBase role=\\"link\\" className=\\"insights-link target-page-link\\" onClick={[Function: proxy]} aria-label=\\"Switch to target page: command-bar-test-tab-title\\">
-        command-bar-test-tab-title
+      <StyledLinkBase role=\\"link\\" className=\\"insights-link targetPageLink\\" onClick={[Function: proxy]} aria-label=\\"Switch to target page: command-bar-test-tab-title\\">
+        <span className=\\"targetPageTitle\\">
+          command-bar-test-tab-title
+        </span>
       </StyledLinkBase>
     </StyledTooltipHostBase>
   </div>
   <div className=\\"detailsViewCommandButtons\\">
-    <CustomizedActionButton>
-      Report Export Component
-    </CustomizedActionButton>
+    <ReportExportButton showReportExportDialog={[Function]} buttonRef={[Function: buttonRef]} />
+  </div>
+  <div>
+    Export dialog
+  </div>
+</div>"
+`;
+
+exports[`DetailsViewCommandBar renders with report export dialog open 1`] = `
+"<div className=\\"detailsViewCommandBar\\">
+  <div className=\\"detailsViewTargetPage\\" aria-labelledby=\\"switch-to-target\\">
+    <span id=\\"switch-to-target\\">
+      Target page: 
+    </span>
+    <StyledTooltipHostBase content=\\"Switch to target page: command-bar-test-tab-title\\" styles={{...}}>
+      <StyledLinkBase role=\\"link\\" className=\\"insights-link targetPageLink\\" onClick={[Function: proxy]} aria-label=\\"Switch to target page: command-bar-test-tab-title\\">
+        <span className=\\"targetPageTitle\\">
+          command-bar-test-tab-title
+        </span>
+      </StyledLinkBase>
+    </StyledTooltipHostBase>
+  </div>
+  <div className=\\"detailsViewCommandButtons\\">
+    <ReportExportButton showReportExportDialog={[Function]} buttonRef={[Function: buttonRef]} />
+  </div>
+  <div>
+    Export dialog
   </div>
 </div>"
 `;
@@ -50,8 +97,10 @@ exports[`DetailsViewCommandBar renders without export button, with start over 1`
       Target page: 
     </span>
     <StyledTooltipHostBase content=\\"Switch to target page: command-bar-test-tab-title\\" styles={{...}}>
-      <StyledLinkBase role=\\"link\\" className=\\"insights-link target-page-link\\" onClick={[Function: proxy]} aria-label=\\"Switch to target page: command-bar-test-tab-title\\">
-        command-bar-test-tab-title
+      <StyledLinkBase role=\\"link\\" className=\\"insights-link targetPageLink\\" onClick={[Function: proxy]} aria-label=\\"Switch to target page: command-bar-test-tab-title\\">
+        <span className=\\"targetPageTitle\\">
+          command-bar-test-tab-title
+        </span>
       </StyledLinkBase>
     </StyledTooltipHostBase>
   </div>
@@ -59,6 +108,9 @@ exports[`DetailsViewCommandBar renders without export button, with start over 1`
     <CustomizedActionButton>
       Start Over Component
     </CustomizedActionButton>
+  </div>
+  <div>
+    Export dialog
   </div>
 </div>"
 `;
@@ -70,10 +122,15 @@ exports[`DetailsViewCommandBar renders without export button, without start over
       Target page: 
     </span>
     <StyledTooltipHostBase content=\\"Switch to target page: command-bar-test-tab-title\\" styles={{...}}>
-      <StyledLinkBase role=\\"link\\" className=\\"insights-link target-page-link\\" onClick={[Function: proxy]} aria-label=\\"Switch to target page: command-bar-test-tab-title\\">
-        command-bar-test-tab-title
+      <StyledLinkBase role=\\"link\\" className=\\"insights-link targetPageLink\\" onClick={[Function: proxy]} aria-label=\\"Switch to target page: command-bar-test-tab-title\\">
+        <span className=\\"targetPageTitle\\">
+          command-bar-test-tab-title
+        </span>
       </StyledLinkBase>
     </StyledTooltipHostBase>
+  </div>
+  <div>
+    Export dialog
   </div>
 </div>"
 `;

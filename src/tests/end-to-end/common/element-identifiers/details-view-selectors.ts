@@ -6,6 +6,7 @@ import { instanceTableTextContentAutomationId } from 'DetailsView/components/ass
 import { visualHelperToggleAutomationId } from 'DetailsView/components/base-visual-helper-toggle';
 import { settingsPanelAutomationId } from 'DetailsView/components/details-view-overlay/settings-panel/settings-panel';
 import { IframeWarningContainerAutomationId } from 'DetailsView/components/iframe-warning';
+import { overviewContainerAutomationId } from 'DetailsView/components/overview-content/overview-content-container';
 import { overviewHeadingAutomationId } from 'DetailsView/components/overview-content/overview-heading';
 import { startOverAutomationId } from 'DetailsView/components/start-over-component-factory';
 import { failureCountAutomationId } from 'reports/components/outcome-chip';
@@ -18,15 +19,18 @@ import { getAutomationIdSelector } from 'tests/common/get-automation-id-selector
 export const detailsViewSelectors = {
     previewFeaturesPanel: '.preview-features-panel',
 
-    testNavLink: (testName: string): string => `nav [name="${testName}"] a`,
+    testNavLink: (testName: string): string => `div [name="${testName}"]`,
     requirementNavLink: (requirementName: string): string => `div [name="${requirementName}"] a`,
+    gettingStartedNavLink: 'div [name="Getting Started"]',
 
     visualHelperToggle: getAutomationIdSelector(visualHelperToggleAutomationId),
 
     requirementWithStatus: (
         requirementName: string,
+        requirementIndex: string,
         status: 'Passed' | 'Failed' | 'Incomplete',
-    ): string => `div[name="${requirementName}"][title^="${requirementName}. ${status}."]`,
+    ): string =>
+        `div[name="${requirementName}"][title^="${requirementIndex}: ${requirementName} (${status})"]`,
 
     mainContent: '[role=main]',
     instanceTableTextContent: getAutomationIdSelector(instanceTableTextContentAutomationId),
@@ -34,6 +38,15 @@ export const detailsViewSelectors = {
     settingsButton: 'button[name="Settings"]',
 
     automatedChecksResultSection: getAutomationIdSelector(resultSectionAutomationId),
+
+    commandBarMenuButton: 'button[aria-label="More items"]',
+    commandBarMenuButtonExpanded: (expanded: boolean) =>
+        `button[aria-label="More items"][aria-expanded=${expanded}`,
+
+    assessmentNavHamburgerButton:
+        'button[aria-label="Assessment - all tests and requirements list"]',
+    assessmentNavHamburgerButtonExpanded: (expanded: boolean) =>
+        `button[aria-label="Assessment - all tests and requirements list"][aria-expanded=${expanded}]`,
 };
 
 export const fastPassAutomatedChecksSelectors = {
@@ -46,7 +59,7 @@ export const fastPassAutomatedChecksSelectors = {
 };
 
 export const overviewSelectors = {
-    overview: '.overview',
+    overview: getAutomationIdSelector(overviewContainerAutomationId),
     overviewHeading: getAutomationIdSelector(overviewHeadingAutomationId),
 };
 

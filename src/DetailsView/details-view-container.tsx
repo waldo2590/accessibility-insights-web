@@ -4,12 +4,10 @@ import { Header, HeaderProps } from 'common/components/header';
 import { GetCardSelectionViewData } from 'common/get-card-selection-view-data';
 import { IsResultHighlightUnavailable } from 'common/is-result-highlight-unavailable';
 import { CardSelectionStoreData } from 'common/types/store-data/card-selection-store-data';
-import { ISelection, Spinner, SpinnerSize } from 'office-ui-fabric-react';
-import * as React from 'react';
-
-import { FeatureFlags } from 'common/feature-flags';
 import { DetailsViewContentWithLocalState } from 'DetailsView/components/details-view-content-with-local-state';
 import { NarrowModeDetector } from 'DetailsView/components/narrow-mode-detector';
+import { ISelection, Spinner, SpinnerSize } from 'office-ui-fabric-react';
+import * as React from 'react';
 import { ThemeDeps } from '../common/components/theme';
 import {
     withStoreSubscription,
@@ -96,14 +94,11 @@ export class DetailsViewContainer extends React.Component<DetailsViewContainerPr
 
     public render(): JSX.Element {
         if (this.shouldShowNoContentAvailable()) {
-            const headerProps: Omit<HeaderProps, 'isNarrowMode'> = { deps: this.props.deps };
+            const headerProps: Omit<HeaderProps, 'narrowModeStatus'> = { deps: this.props.deps };
             return (
                 <>
                     <NarrowModeDetector
-                        isNarrowModeEnabled={
-                            this.hasStores() &&
-                            this.props.storeState.featureFlagStoreData[FeatureFlags.reflowUI]
-                        }
+                        isNarrowModeEnabled={this.hasStores()}
                         Component={Header}
                         childrenProps={headerProps}
                     />

@@ -2,12 +2,20 @@
 // Licensed under the MIT License.
 import { ScanIncompleteWarningsTelemetryData } from 'common/extension-telemetry-events';
 import { ToolData } from 'common/types/store-data/unified-data-interface';
+import { FilterResults } from 'injected/analyzers/filter-results';
+import {
+    NotificationTextCreator,
+    TextGenerator,
+} from 'injected/analyzers/notification-text-creator';
 import { ScanIncompleteWarningDetector } from 'injected/scan-incomplete-warning-detector';
 import { isEmpty } from 'lodash';
+import { ScanResults } from 'scanner/iruleresults';
 import { UnifiedScanCompletedPayload } from '../../background/actions/action-payloads';
 import { Messages } from '../../common/messages';
-import { UUIDGenerator } from '../../common/uid-generator';
-import { ConvertScanResultsToUnifiedResultsDelegate } from '../adapters/scan-results-to-unified-results';
+import {
+    ConvertScanResultsToUnifiedResults,
+    ConvertScanResultsToUnifiedResultsDelegate,
+} from '../adapters/scan-results-to-unified-results';
 import { ConvertScanResultsToUnifiedRulesDelegate } from '../adapters/scan-results-to-unified-rules';
 import { AxeAnalyzerResult } from './analyzer';
 import { MessageDelegate, PostResolveCallback } from './rule-analyzer';
@@ -15,14 +23,35 @@ import { MessageDelegate, PostResolveCallback } from './rule-analyzer';
 export class UnifiedResultSender {
     constructor(
         private readonly sendMessage: MessageDelegate,
-        private readonly convertScanResultsToUnifiedResults: ConvertScanResultsToUnifiedResultsDelegate,
         private readonly convertScanResultsToUnifiedRules: ConvertScanResultsToUnifiedRulesDelegate,
         private readonly toolData: ToolData,
-        private readonly generateUID: UUIDGenerator,
+        private readonly convertScanResultsToUnifiedResults: ConvertScanResultsToUnifiedResults,
         private readonly scanIncompleteWarningDetector: ScanIncompleteWarningDetector,
+        private readonly notificationTextCreator: NotificationTextCreator,
+        private readonly filterNeedsReviewResults: FilterResults,
     ) {}
 
-    public sendResults: PostResolveCallback = (axeResults: AxeAnalyzerResult) => {
+    public sendAutomatedChecksResults: PostResolveCallback = (axeResults: AxeAnalyzerResult) => {
+        this.sendResults(
+            axeResults.originalResult,
+            this.convertScanResultsToUnifiedResults.automatedChecksConversion,
+            this.notificationTextCreator.automatedChecksText,
+        );
+    };
+
+    public sendNeedsReviewResults: PostResolveCallback = (axeResults: AxeAnalyzerResult) => {
+        this.sendResults(
+            this.filterNeedsReviewResults(axeResults.originalResult),
+            this.convertScanResultsToUnifiedResults.needsReviewConversion,
+            this.notificationTextCreator.needsReviewText,
+        );
+    };
+
+    private sendResults = (
+        results: ScanResults,
+        converter: ConvertScanResultsToUnifiedResultsDelegate,
+        notificationMessage: TextGenerator,
+    ) => {
         const scanIncompleteWarnings = this.scanIncompleteWarningDetector.detectScanIncompleteWarnings();
 
         let telemetry: ScanIncompleteWarningsTelemetryData = null;
@@ -33,20 +62,20 @@ export class UnifiedResultSender {
             };
         }
 
+        const unifiedResults = converter(results);
+
         const payload: UnifiedScanCompletedPayload = {
-            scanResult: this.convertScanResultsToUnifiedResults(
-                axeResults.originalResult,
-                this.generateUID,
-            ),
-            rules: this.convertScanResultsToUnifiedRules(axeResults.originalResult),
+            scanResult: unifiedResults,
+            rules: this.convertScanResultsToUnifiedRules(results),
             toolInfo: this.toolData,
-            timestamp: axeResults.originalResult.timestamp,
+            timestamp: results.timestamp,
             targetAppInfo: {
-                name: axeResults.originalResult.targetPageTitle,
-                url: axeResults.originalResult.targetPageUrl,
+                name: results.targetPageTitle,
+                url: results.targetPageUrl,
             },
             scanIncompleteWarnings,
             telemetry,
+            notificationText: notificationMessage(unifiedResults),
         };
 
         this.sendMessage({
