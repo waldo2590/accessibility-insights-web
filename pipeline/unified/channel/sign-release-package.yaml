@@ -38,7 +38,7 @@ jobs:
 
           - task: SFP.build-tasks.custom-build-task-1.EsrpCodeSigning@1
             displayName: 'Send to ESRP Code Signing service for notarization'
-            condition: ne('${{ parameters.inlineNotarizeParams }}', null)
+            condition: ne('${{ parameters.inlineNotarizeParams }}', '')
             inputs:
                 ConnectedServiceName: 'ESRP Code Signing'
                 FolderPath: '$(System.DefaultWorkingDirectory)/signing-in-progress/${{ parameters.signedArtifactName }}'
