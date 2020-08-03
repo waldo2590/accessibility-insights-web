@@ -37,6 +37,7 @@ mac:
     target: dmg # we also need zip (electron-userland/electron-builder#2199) & add it in grunt
     identity: null
     hardenedRuntime: true
+    gatekeeperAssess: false
     entitlements: src/electron/resources/entitlements.mac.plist
     entitlementsInherit: src/electron/resources/entitlements.mac.plist
 
