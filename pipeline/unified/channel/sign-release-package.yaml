@@ -4,6 +4,7 @@ parameters:
     vmImage: null
     filePattern: null
     inlineSignParams: null
+    inlineNotarizeParams: null
     unsignedPipelineResource: null
     unsignedArtifactName: null
     signedArtifactName: null
@@ -37,27 +38,13 @@ jobs:
 
           - task: SFP.build-tasks.custom-build-task-1.EsrpCodeSigning@1
             displayName: 'Send to ESRP Code Signing service for notarization'
-            condition: eq('${{ parameters.platform }}', 'mac')
+            condition: ne('${{ parameters.inlineNotarizeParams }}', null)
             inputs:
                 ConnectedServiceName: 'ESRP Code Signing'
                 FolderPath: '$(System.DefaultWorkingDirectory)/signing-in-progress/${{ parameters.signedArtifactName }}'
                 Pattern: ${{ parameters.filePattern }}
                 signConfigType: inlineSignParams
-                inlineOperation: |
-                    [
-                        {
-                        "keyCode": "CP-401337-Apple",
-                        "operationSetCode": "MacAppNotarize",
-                        "parameters": [
-                            {
-                            "parameterName": "BundleId",
-                            "parameterValue": 'com.microsoft.accessibilityinsights'
-                            }
-                        ],
-                        "toolName": "sign",
-                        "toolVersion": "1.0"
-                        }
-                    ]
+                inlineOperation: ${{ parameters.inlineNotarizeParams }}
 
           - script: node ./pipeline/scripts/update-latest-yml.js signing-in-progress/${{ parameters.signedArtifactName }} ${{ parameters.platform }}
             displayName: update electron-builder latest.yml after signing

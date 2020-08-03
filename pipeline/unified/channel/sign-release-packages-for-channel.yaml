@@ -15,6 +15,7 @@ jobs:
 
     - template: sign-release-package-mac.yaml
       parameters:
+          bundleId: ${{ parameters.channel }}
           unsignedPipelineResource: ${{ parameters.unsignedPipelineResource }}
           unsignedArtifactName: unified-mac-${{ parameters.channel }}-unsigned
           signedArtifactName: unified_mac_${{ parameters.channel }}_signed
