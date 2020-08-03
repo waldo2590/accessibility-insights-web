@@ -36,6 +36,9 @@ mac:
     icon: TARGET_SPECIFIC
     target: dmg # we also need zip (electron-userland/electron-builder#2199) & add it in grunt
     identity: null
+    hardenedRuntime: true
+    entitlements: src/electron/resources/entitlements.plist
+    entitlementsInherit: src/electron/resources/entitlements.inherit.plist
 
 win:
     artifactName: ${productName} setup.${ext}

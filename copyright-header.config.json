@@ -23,6 +23,7 @@
         ".ignoredRevs",
         "**/.DS_Store",
         "**/*.icns",
+        "**/*.plist",
         "**/*.scss.d.ts",
         "**/*.snap",
         "**/*.svg",
