@@ -38,7 +38,7 @@ jobs:
                   "parameters": [
                       {
                       "parameterName": "BundleId",
-                      "parameterValue": '${{ parameters.bundleId }}'
+                      "parameterValue": "${{ parameters.bundleId }}"
                       }
                   ],
                   "toolName": "sign",
