@@ -150,6 +150,7 @@
         "webpack-node-externals": "^2.5.2"
     },
     "dependencies": {
+        "@fluentui/react": "^7.144.2",
         "accessibility-insights-for-android-service-bin": "^1.2.1",
         "appium-adb": "^8.8.0",
         "applicationinsights-js": "^1.0.21",
@@ -162,7 +163,6 @@
         "idb-keyval": "^3.2.0",
         "lodash": "^4.17.20",
         "luxon": "^1.25.0",
-        "office-ui-fabric-react": "7.98.0",
         "portfinder": "^1.0.28",
         "q": "1.5.1",
         "react": "^16.13.1",

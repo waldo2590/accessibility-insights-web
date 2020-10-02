@@ -4,6 +4,7 @@ module.exports = {
     clearMocks: true,
     moduleDirectories: ['node_modules', 'src'],
     moduleNameMapper: {
+        '@fluentui/react/lib/(.*)$': '@fluentui/react/lib-commonjs/$1',
         'office-ui-fabric-react/lib/(.*)$': 'office-ui-fabric-react/lib-commonjs/$1',
         '@uifabric/utilities': '@uifabric/utilities/lib-commonjs',
         '@uifabric/styling': '@uifabric/styling/lib-commonjs',

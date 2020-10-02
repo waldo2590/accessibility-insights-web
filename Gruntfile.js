@@ -125,7 +125,7 @@ module.exports = function (grunt) {
                         expand: true,
                     },
                     {
-                        cwd: './node_modules/office-ui-fabric-react/dist/css',
+                        cwd: './node_modules/@fluentui/react/dist/css',
                         src: 'fabric.min.css',
                         dest: path.join(extensionPath, 'common/styles/'),
                         expand: true,
