@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 import { DocumentManipulator } from 'common/document-manipulator';
-import { loadTheme } from 'office-ui-fabric-react';
+import { loadTheme } from '@fluentui/react';
 import * as ReactDOM from 'react-dom';
 import { A11YSelfValidator } from '../common/a11y-self-validator';
 import { AutoChecker } from '../common/auto-checker';

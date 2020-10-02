@@ -3,7 +3,7 @@
 import { FlaggedComponent } from 'common/components/flagged-component';
 import { FeatureFlags } from 'common/feature-flags';
 import { FeatureFlagStoreData } from 'common/types/store-data/feature-flag-store-data';
-import { Dialog, DialogFooter, DialogType, PrimaryButton, TextField } from 'office-ui-fabric-react';
+import { Dialog, DialogFooter, DialogType, PrimaryButton, TextField } from '@fluentui/react';
 import * as React from 'react';
 import { ReportExportServiceProvider } from 'report-export/report-export-service-provider';
 import { ReportExportServiceKey } from 'report-export/types/report-export-service';

@@ -6,7 +6,7 @@ import { generateReflowAssessmentTestKey } from 'DetailsView/components/left-nav
 import { Switcher, SwitcherDeps } from 'DetailsView/components/switcher';
 import { leftNavSwitcherStyleNames } from 'DetailsView/components/switcher-style-names';
 import { mapValues } from 'lodash';
-import { INav } from 'office-ui-fabric-react';
+import { INav } from '@fluentui/react';
 import * as React from 'react';
 import { NamedFC } from '../../../common/react/named-fc';
 import { AssessmentStoreData } from '../../../common/types/store-data/assessment-result-data';

@@ -3,8 +3,8 @@
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import { It, Mock, Times } from 'typemoq';
+import { BaseButton, Button } from '@fluentui/react';
 
-import { BaseButton, Button } from '../../../../../../node_modules/office-ui-fabric-react';
 import { CopyIssueDetailsButton } from '../../../../../common/components/copy-issue-details-button';
 import { CreateIssueDetailsTextData } from '../../../../../common/types/create-issue-details-text-data';
 import { UserConfigurationStoreData } from '../../../../../common/types/store-data/user-configuration-store';

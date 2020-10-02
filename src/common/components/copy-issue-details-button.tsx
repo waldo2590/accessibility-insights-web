@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 import { IssueDetailsTextGenerator } from 'background/issue-details-text-generator';
 import { NavigatorUtils } from 'common/navigator-utils';
-import { DefaultButton } from 'office-ui-fabric-react';
+import { DefaultButton } from '@fluentui/react';
 import * as React from 'react';
 
 import { ToolData } from 'common/types/store-data/unified-data-interface';

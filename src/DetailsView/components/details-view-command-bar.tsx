@@ -1,13 +1,13 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-import { css } from '@uifabric/utilities';
+import { css } from '@fluentui/react';
 import { AssessmentsProvider } from 'assessments/types/assessments-provider';
 import { CardsViewModel } from 'common/types/store-data/card-view-model';
 import { VisualizationStoreData } from 'common/types/store-data/visualization-store-data';
 import { DetailsViewActionMessageCreator } from 'DetailsView/actions/details-view-action-message-creator';
 import { detailsViewCommandButtons } from 'DetailsView/components/details-view-command-bar.scss';
 import { DetailsViewSwitcherNavConfiguration } from 'DetailsView/components/details-view-switcher-nav';
-import { IButton, ITooltipHostStyles, Link, TooltipHost } from 'office-ui-fabric-react';
+import { IButton, ITooltipHostStyles, Link, TooltipHost } from '@fluentui/react';
 import * as React from 'react';
 import { ReportGenerator } from 'reports/report-generator';
 

@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 import { AssessmentsProvider } from 'assessments/types/assessments-provider';
 import * as styles from 'DetailsView/components/assessment-instance-edit-and-remove-control.scss';
-import { Icon, Link } from 'office-ui-fabric-react';
+import { Icon, Link } from '@fluentui/react';
 import * as React from 'react';
 import { FeatureFlagStoreData } from '../../common/types/store-data/feature-flag-store-data';
 import { VisualizationType } from '../../common/types/visualization-type';

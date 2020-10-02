@@ -1,6 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-import { css } from '@uifabric/utilities';
+import { css } from '@fluentui/react';
 import * as Markup from 'assessments/markup';
 import { BlockingDialog } from 'common/components/blocking-dialog';
 import { NewTabLink } from 'common/components/new-tab-link';
@@ -10,7 +10,7 @@ import { UrlParser } from 'common/url-parser';
 import * as commonDialogStyles from 'DetailsView/components/common-dialog-styles.scss';
 import * as styles from 'DetailsView/components/target-change-dialog.scss';
 import { isEmpty } from 'lodash';
-import { DefaultButton, DialogFooter, DialogType, Link, TooltipHost } from 'office-ui-fabric-react';
+import { DefaultButton, DialogFooter, DialogType, Link, TooltipHost } from '@fluentui/react';
 import * as React from 'react';
 import { DetailsViewActionMessageCreator } from '../actions/details-view-action-message-creator';
 

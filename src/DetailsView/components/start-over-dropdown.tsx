@@ -1,13 +1,13 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-import { IPoint } from '@uifabric/utilities';
+import { IPoint } from '@fluentui/react';
 import {
     ContextualMenu,
     DirectionalHint,
     IButton,
     IContextualMenuItem,
     IRefObject,
-} from 'office-ui-fabric-react';
+} from '@fluentui/react';
 import * as React from 'react';
 
 import { InsightsCommandButton } from 'common/components/controls/insights-command-button';

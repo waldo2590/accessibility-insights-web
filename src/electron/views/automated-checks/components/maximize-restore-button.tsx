@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-import { ActionButton } from 'office-ui-fabric-react';
+import { ActionButton } from '@fluentui/react';
 import * as React from 'react';
 
 import { RestoreIcon } from 'common/icons/restore-icon';

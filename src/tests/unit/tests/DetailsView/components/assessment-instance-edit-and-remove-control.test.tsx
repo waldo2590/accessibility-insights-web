@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 import * as styles from 'DetailsView/components/assessment-instance-edit-and-remove-control.scss';
-import { Icon, Link } from 'office-ui-fabric-react';
+import { Icon, Link } from '@fluentui/react';
 import * as React from 'react';
 import { Mock, Times } from 'typemoq';
 import { FeatureFlagStoreData } from '../../../../../common/types/store-data/feature-flag-store-data';

@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 import { ScanIncompleteWarningId } from 'common/types/scan-incomplete-warnings';
 import { DetailsViewSwitcherNavConfiguration } from 'DetailsView/components/details-view-switcher-nav';
-import { ISelection } from 'office-ui-fabric-react';
+import { ISelection } from '@fluentui/react';
 
 import { ScanMetadata } from 'common/types/store-data/unified-data-interface';
 import { VisualizationConfigurationFactory } from '../../common/configs/visualization-configuration-factory';

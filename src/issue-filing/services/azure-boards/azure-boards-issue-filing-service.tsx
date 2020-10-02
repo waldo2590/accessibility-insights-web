@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 import { isEmpty } from 'lodash';
-import { IDropdownOption } from 'office-ui-fabric-react';
+import { IDropdownOption } from '@fluentui/react';
 
 import { IssueDetailsBuilder } from 'issue-filing/common/issue-details-builder';
 import { createFileIssueHandler } from '../../common/create-file-issue-handler';

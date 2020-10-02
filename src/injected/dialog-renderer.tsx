@@ -1,6 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-import { getRTL } from '@uifabric/utilities';
+import { getRTL } from '@fluentui/react';
 import { IssueDetailsTextGenerator } from 'background/issue-details-text-generator';
 import { NavigatorUtils } from 'common/navigator-utils';
 import * as React from 'react';

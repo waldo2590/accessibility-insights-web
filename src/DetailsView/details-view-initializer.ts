@@ -25,7 +25,7 @@ import { NoContentAvailableViewDeps } from 'DetailsView/components/no-content-av
 import { AllUrlsPermissionHandler } from 'DetailsView/handlers/allurls-permission-handler';
 import { NoContentAvailableViewRenderer } from 'DetailsView/no-content-available-view-renderer';
 import { NullStoreActionMessageCreator } from 'electron/adapters/null-store-action-message-creator';
-import { loadTheme, setFocusVisibility } from 'office-ui-fabric-react';
+import { loadTheme, setFocusVisibility } from '@fluentui/react';
 import * as ReactDOM from 'react-dom';
 import { ReportExportServiceProviderImpl } from 'report-export/report-export-service-provider-impl';
 import { AssessmentReportHtmlGenerator } from 'reports/assessment-report-html-generator';

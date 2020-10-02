@@ -3,7 +3,7 @@
 import { FlaggedComponent } from 'common/components/flagged-component';
 import { FeatureFlags } from 'common/feature-flags';
 import { shallow } from 'enzyme';
-import { Dialog, PrimaryButton, TextField } from 'office-ui-fabric-react';
+import { Dialog, PrimaryButton, TextField } from '@fluentui/react';
 import * as React from 'react';
 import { ReportExportServiceProvider } from 'report-export/report-export-service-provider';
 import { CodePenReportExportService } from 'report-export/services/code-pen-report-export-service';

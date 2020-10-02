@@ -6,7 +6,7 @@ import { IsResultHighlightUnavailable } from 'common/is-result-highlight-unavail
 import { CardSelectionStoreData } from 'common/types/store-data/card-selection-store-data';
 import { DetailsViewContentWithLocalState } from 'DetailsView/components/details-view-content-with-local-state';
 import { NarrowModeDetector } from 'DetailsView/components/narrow-mode-detector';
-import { ISelection, Spinner, SpinnerSize } from 'office-ui-fabric-react';
+import { ISelection, Spinner, SpinnerSize } from '@fluentui/react';
 import * as React from 'react';
 import { ThemeDeps } from '../common/components/theme';
 import {

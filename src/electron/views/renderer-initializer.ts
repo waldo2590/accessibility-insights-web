@@ -107,7 +107,7 @@ import { IssueFilingUrlStringUtils } from 'issue-filing/common/issue-filing-url-
 import { PlainTextFormatter } from 'issue-filing/common/markup/plain-text-formatter';
 import { IssueFilingServiceProviderForUnifiedImpl } from 'issue-filing/issue-filing-service-provider-for-unified-impl';
 import { UnifiedResultToIssueFilingDataConverter } from 'issue-filing/unified-result-to-issue-filing-data';
-import { loadTheme, setFocusVisibility } from 'office-ui-fabric-react';
+import { loadTheme, setFocusVisibility } from '@fluentui/react';
 import { getPortPromise } from 'portfinder';
 import * as ReactDOM from 'react-dom';
 import { ReportExportServiceProviderImpl } from 'report-export/report-export-service-provider-impl';

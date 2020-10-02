@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-import { Dropdown, IDropdownOption } from 'office-ui-fabric-react';
-import { Icon } from 'office-ui-fabric-react';
-import { ResponsiveMode } from 'office-ui-fabric-react';
+import { Dropdown, IDropdownOption } from '@fluentui/react';
+import { Icon } from '@fluentui/react';
+import { ResponsiveMode } from '@fluentui/react';
 import * as React from 'react';
 import { SwitcherStyleNames } from './switcher-style-names';
 

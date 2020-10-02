@@ -2,14 +2,7 @@
 // Licensed under the MIT License.
 import * as styles from 'common/components/selector-input-list.scss';
 import * as Enzyme from 'enzyme';
-import {
-    DefaultButton,
-    FocusZone,
-    IconButton,
-    ITextField,
-    List,
-    TextField,
-} from 'office-ui-fabric-react';
+import { DefaultButton, FocusZone, IconButton, ITextField, List, TextField } from '@fluentui/react';
 import * as React from 'react';
 import { IMock, It, Mock, Times } from 'typemoq';
 import {

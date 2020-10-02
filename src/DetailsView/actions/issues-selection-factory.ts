@@ -1,6 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-import { ISelection } from 'office-ui-fabric-react';
+import { ISelection } from '@fluentui/react';
 
 import { DetailsRowData } from '../components/issues-table-handler';
 import { DetailsViewActionMessageCreator } from './details-view-action-message-creator';

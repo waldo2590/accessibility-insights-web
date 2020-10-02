@@ -5,8 +5,8 @@ import {
     FixInstructionPanelDeps,
 } from 'common/components/fix-instruction-panel';
 import { isEmpty, size } from 'lodash';
-import { css } from 'office-ui-fabric-react';
-import { Dialog, DialogType } from 'office-ui-fabric-react';
+import { css } from '@fluentui/react';
+import { Dialog, DialogType } from '@fluentui/react';
 import * as React from 'react';
 import { HyperlinkDefinition } from 'views/content/content-page';
 

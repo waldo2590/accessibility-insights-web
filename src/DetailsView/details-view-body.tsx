@@ -12,7 +12,7 @@ import { DetailsViewCommandBarProps } from 'DetailsView/components/details-view-
 import { FluentSideNav, FluentSideNavDeps } from 'DetailsView/components/left-nav/fluent-side-nav';
 import { NarrowModeStatus } from 'DetailsView/components/narrow-mode-detector';
 import * as styles from 'DetailsView/details-view-body.scss';
-import { ISelection } from 'office-ui-fabric-react';
+import { ISelection } from '@fluentui/react';
 import * as React from 'react';
 import { VisualizationConfigurationFactory } from '../common/configs/visualization-configuration-factory';
 import { DropdownClickHandler } from '../common/dropdown-click-handler';
