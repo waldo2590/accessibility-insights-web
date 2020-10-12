@@ -1,15 +1,15 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-import { IPoint } from '@fluentui/react';
 import { Mock } from 'typemoq';
 
-import { DrawerUtils } from '../../../../../injected/visualization/drawer-utils';
+import { DrawerUtils } from 'injected/visualization/drawer-utils';
 import {
     CircleConfiguration,
     LineConfiguration,
     TextConfiguration,
-} from '../../../../../injected/visualization/formatter';
-import { SVGShapeFactory } from '../../../../../injected/visualization/svg-shape-factory';
+} from 'injected/visualization/formatter';
+import { Point } from 'injected/visualization/point';
+import { SVGShapeFactory } from 'injected/visualization/svg-shape-factory';
 
 describe('SVGShapeFactoryTest', () => {
     const drawerUtilsMock = Mock.ofType(DrawerUtils);
@@ -35,12 +35,12 @@ describe('SVGShapeFactoryTest', () => {
     });
 
     test('create line, destination is on quadrant I', () => {
-        const source: IPoint = {
+        const source: Point = {
             x: 0,
             y: 0,
         };
 
-        const destination: IPoint = {
+        const destination: Point = {
             x: 100,
             y: 100,
         };
@@ -54,12 +54,12 @@ describe('SVGShapeFactoryTest', () => {
         );
 
         const angle = Math.PI / 4;
-        const expectedSource: IPoint = {
+        const expectedSource: Point = {
             x: (defaultCircleRadius + expectedLineBuffer) * Math.cos(angle),
             y: (defaultCircleRadius + expectedLineBuffer) * Math.sin(angle),
         };
 
-        const expectedDestination: IPoint = {
+        const expectedDestination: Point = {
             x: 100 - (defaultCircleRadius + expectedLineBuffer) * Math.cos(angle),
             y: 100 - (defaultCircleRadius + expectedLineBuffer) * Math.sin(angle),
         };
@@ -68,12 +68,12 @@ describe('SVGShapeFactoryTest', () => {
     });
 
     test('create line, destination on quadrant II', () => {
-        const source: IPoint = {
+        const source: Point = {
             x: 0,
             y: 0,
         };
 
-        const destination: IPoint = {
+        const destination: Point = {
             x: -100,
             y: 100,
         };
@@ -87,12 +87,12 @@ describe('SVGShapeFactoryTest', () => {
         );
 
         const angle = (3 * Math.PI) / 4;
-        const expectedSource: IPoint = {
+        const expectedSource: Point = {
             x: (defaultCircleRadius + expectedLineBuffer) * Math.cos(angle),
             y: (defaultCircleRadius + expectedLineBuffer) * Math.sin(angle),
         };
 
-        const expectedDestination: IPoint = {
+        const expectedDestination: Point = {
             x: -100 - (defaultCircleRadius + expectedLineBuffer) * Math.cos(angle),
             y: 100 - (defaultCircleRadius + expectedLineBuffer) * Math.sin(angle),
         };
@@ -101,12 +101,12 @@ describe('SVGShapeFactoryTest', () => {
     });
 
     test('create line, destination on quadrant III', () => {
-        const source: IPoint = {
+        const source: Point = {
             x: 0,
             y: 0,
         };
 
-        const destination: IPoint = {
+        const destination: Point = {
             x: -100,
             y: -100,
         };
@@ -120,12 +120,12 @@ describe('SVGShapeFactoryTest', () => {
         );
 
         const angle = (5 * Math.PI) / 4;
-        const expectedSource: IPoint = {
+        const expectedSource: Point = {
             x: (defaultCircleRadius + expectedLineBuffer) * Math.cos(angle),
             y: (defaultCircleRadius + expectedLineBuffer) * Math.sin(angle),
         };
 
-        const expectedDestination: IPoint = {
+        const expectedDestination: Point = {
             x: -100 - (defaultCircleRadius + expectedLineBuffer) * Math.cos(angle),
             y: -100 - (defaultCircleRadius + expectedLineBuffer) * Math.sin(angle),
         };
@@ -134,12 +134,12 @@ describe('SVGShapeFactoryTest', () => {
     });
 
     test('create line, destination on quadrant IV', () => {
-        const source: IPoint = {
+        const source: Point = {
             x: 0,
             y: 0,
         };
 
-        const destination: IPoint = {
+        const destination: Point = {
             x: 100,
             y: -100,
         };
@@ -153,12 +153,12 @@ describe('SVGShapeFactoryTest', () => {
         );
 
         const angle = (7 * Math.PI) / 4;
-        const expectedSource: IPoint = {
+        const expectedSource: Point = {
             x: (defaultCircleRadius + expectedLineBuffer) * Math.cos(angle),
             y: (defaultCircleRadius + expectedLineBuffer) * Math.sin(angle),
         };
 
-        const expectedDestination: IPoint = {
+        const expectedDestination: Point = {
             x: 100 - (defaultCircleRadius + expectedLineBuffer) * Math.cos(angle),
             y: -100 - (defaultCircleRadius + expectedLineBuffer) * Math.sin(angle),
         };
@@ -167,12 +167,12 @@ describe('SVGShapeFactoryTest', () => {
     });
 
     test('create line, horizontal, left to right', () => {
-        const source: IPoint = {
+        const source: Point = {
             x: 0,
             y: 0,
         };
 
-        const destination: IPoint = {
+        const destination: Point = {
             x: 100,
             y: 0,
         };
@@ -185,12 +185,12 @@ describe('SVGShapeFactoryTest', () => {
             defaultCircleRadius,
         );
 
-        const expectedSource: IPoint = {
+        const expectedSource: Point = {
             x: defaultCircleRadius + expectedLineBuffer,
             y: 0,
         };
 
-        const expectedDestination: IPoint = {
+        const expectedDestination: Point = {
             x: 100 - (defaultCircleRadius + expectedLineBuffer),
             y: 0,
         };
@@ -199,12 +199,12 @@ describe('SVGShapeFactoryTest', () => {
     });
 
     test('create line, horizontal, right to left', () => {
-        const source: IPoint = {
+        const source: Point = {
             x: 100,
             y: 0,
         };
 
-        const destination: IPoint = {
+        const destination: Point = {
             x: 0,
             y: 0,
         };
@@ -217,12 +217,12 @@ describe('SVGShapeFactoryTest', () => {
             defaultCircleRadius,
         );
 
-        const expectedSource: IPoint = {
+        const expectedSource: Point = {
             x: 100 - (defaultCircleRadius + expectedLineBuffer),
             y: 0,
         };
 
-        const expectedDestination: IPoint = {
+        const expectedDestination: Point = {
             x: defaultCircleRadius + expectedLineBuffer,
             y: 0,
         };
@@ -231,12 +231,12 @@ describe('SVGShapeFactoryTest', () => {
     });
 
     test('create line, vertical, top to bottom', () => {
-        const source: IPoint = {
+        const source: Point = {
             x: 0,
             y: 100,
         };
 
-        const destination: IPoint = {
+        const destination: Point = {
             x: 0,
             y: 0,
         };
@@ -249,12 +249,12 @@ describe('SVGShapeFactoryTest', () => {
             defaultCircleRadius,
         );
 
-        const expectedSource: IPoint = {
+        const expectedSource: Point = {
             x: 0,
             y: 100 - (defaultCircleRadius + expectedLineBuffer),
         };
 
-        const expectedDestination: IPoint = {
+        const expectedDestination: Point = {
             x: 0,
             y: defaultCircleRadius + expectedLineBuffer,
         };
@@ -263,12 +263,12 @@ describe('SVGShapeFactoryTest', () => {
     });
 
     test('create line, vertical, bottom to top', () => {
-        const source: IPoint = {
+        const source: Point = {
             x: 0,
             y: 0,
         };
 
-        const destination: IPoint = {
+        const destination: Point = {
             x: 0,
             y: 100,
         };
@@ -281,12 +281,12 @@ describe('SVGShapeFactoryTest', () => {
             defaultCircleRadius,
         );
 
-        const expectedSource: IPoint = {
+        const expectedSource: Point = {
             x: 0,
             y: defaultCircleRadius + expectedLineBuffer,
         };
 
-        const expectedDestination: IPoint = {
+        const expectedDestination: Point = {
             x: 0,
             y: 100 - (defaultCircleRadius + expectedLineBuffer),
         };
@@ -295,12 +295,12 @@ describe('SVGShapeFactoryTest', () => {
     });
 
     test('create line (full params)', () => {
-        const source: IPoint = {
+        const source: Point = {
             x: 0,
             y: 0,
         };
 
-        const destination: IPoint = {
+        const destination: Point = {
             x: 100,
             y: 100,
         };
@@ -317,12 +317,12 @@ describe('SVGShapeFactoryTest', () => {
     });
 
     test('create line (no stroke dash array)', () => {
-        const source: IPoint = {
+        const source: Point = {
             x: 0,
             y: 0,
         };
 
-        const destination: IPoint = {
+        const destination: Point = {
             x: 100,
             y: 100,
         };
@@ -344,7 +344,7 @@ describe('SVGShapeFactoryTest', () => {
     });
 
     test('create circle', () => {
-        const center: IPoint = {
+        const center: Point = {
             x: 100,
             y: 100,
         };
@@ -362,7 +362,7 @@ describe('SVGShapeFactoryTest', () => {
     });
 
     test('create label', () => {
-        const center: IPoint = {
+        const center: Point = {
             x: 100,
             y: 100,
         };
@@ -379,7 +379,7 @@ describe('SVGShapeFactoryTest', () => {
     function verifyTabIndexLabelParams(
         label: Element,
         configuration: TextConfiguration,
-        center: IPoint,
+        center: Point,
         tabOrder: number,
     ): void {
         expect(label.tagName).toEqual('text');
@@ -394,7 +394,7 @@ describe('SVGShapeFactoryTest', () => {
     function verifyCircleParams(
         circle: Element,
         configuration: CircleConfiguration,
-        center: IPoint,
+        center: Point,
     ): void {
         expect(circle.tagName).toEqual('ellipse');
         expect(circle.getAttributeNS(null, 'fill')).toEqual(configuration.fill);
@@ -432,8 +432,8 @@ describe('SVGShapeFactoryTest', () => {
 
     function verifyLinePoints(
         line: Element,
-        expectedSource: IPoint,
-        expectedDestination: IPoint,
+        expectedSource: Point,
+        expectedDestination: Point,
     ): void {
         const fractionDigits: number = 12;
         const x1 = parseFloat(line.getAttributeNS(null, 'x1'));
