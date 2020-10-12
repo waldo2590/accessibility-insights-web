@@ -24,7 +24,7 @@ exports[`ExportDialog renders with CodePen export form 1`] = `
 `;
 
 exports[`ExportDialog renders with open false 1`] = `
-<StyledWithResponsiveMode
+<Dialog
   dialogContentProps={
     Object {
       "subText": "Optional: please describe the result (it will be saved in the report).",
@@ -90,11 +90,11 @@ exports[`ExportDialog renders with open false 1`] = `
       featureFlagStoreData={Object {}}
     />
   </StyledDialogFooterBase>
-</StyledWithResponsiveMode>
+</Dialog>
 `;
 
 exports[`ExportDialog renders with open true 1`] = `
-<StyledWithResponsiveMode
+<Dialog
   dialogContentProps={
     Object {
       "subText": "Optional: please describe the result (it will be saved in the report).",
@@ -160,5 +160,5 @@ exports[`ExportDialog renders with open true 1`] = `
       featureFlagStoreData={Object {}}
     />
   </StyledDialogFooterBase>
-</StyledWithResponsiveMode>
+</Dialog>
 `;

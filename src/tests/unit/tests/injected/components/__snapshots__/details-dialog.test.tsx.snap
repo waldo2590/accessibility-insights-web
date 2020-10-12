@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DetailsDialog renders with: {"expectedHelpUrl": "http://extension/help-relative", "helpUrl": "help-relative", "isDevToolsOpen": false, "shadowDialog": false} 1`] = `
-<StyledWithResponsiveMode
+<Dialog
   dialogContentProps={
     Object {
       "showCloseButton": false,
@@ -336,7 +336,7 @@ exports[`DetailsDialog renders with: {"expectedHelpUrl": "http://extension/help-
               "_newState": null,
               "_numberOfReRenders": 0,
               "_renderPhaseUpdates": null,
-              "_rendered": <StyledWithResponsiveMode
+              "_rendered": <Dialog
                 dialogContentProps={
                   Object {
                     "showCloseButton": false,
@@ -523,7 +523,7 @@ exports[`DetailsDialog renders with: {"expectedHelpUrl": "http://extension/help-
                     }
                   />
                 </div>
-              </StyledWithResponsiveMode>,
+              </Dialog>,
               "_rendering": false,
               "_updater": [Circular],
               "_workInProgressHook": null,
@@ -550,7 +550,7 @@ exports[`DetailsDialog renders with: {"expectedHelpUrl": "http://extension/help-
       }
     />
   </div>
-</StyledWithResponsiveMode>
+</Dialog>
 `;
 
 exports[`DetailsDialog renders with: {"expectedHelpUrl": "http://extension/help-relative", "helpUrl": "help-relative", "isDevToolsOpen": false, "shadowDialog": false}: verify close button for non shadow dom 1`] = `<CancelIcon />`;
@@ -566,7 +566,7 @@ Object {
 `;
 
 exports[`DetailsDialog renders with: {"isDevToolsOpen": false, "shadowDialog": false} 1`] = `
-<StyledWithResponsiveMode
+<Dialog
   dialogContentProps={
     Object {
       "showCloseButton": false,
@@ -901,7 +901,7 @@ exports[`DetailsDialog renders with: {"isDevToolsOpen": false, "shadowDialog": f
               "_newState": null,
               "_numberOfReRenders": 0,
               "_renderPhaseUpdates": null,
-              "_rendered": <StyledWithResponsiveMode
+              "_rendered": <Dialog
                 dialogContentProps={
                   Object {
                     "showCloseButton": false,
@@ -1088,7 +1088,7 @@ exports[`DetailsDialog renders with: {"isDevToolsOpen": false, "shadowDialog": f
                     }
                   />
                 </div>
-              </StyledWithResponsiveMode>,
+              </Dialog>,
               "_rendering": false,
               "_updater": [Circular],
               "_workInProgressHook": null,
@@ -1115,7 +1115,7 @@ exports[`DetailsDialog renders with: {"isDevToolsOpen": false, "shadowDialog": f
       }
     />
   </div>
-</StyledWithResponsiveMode>
+</Dialog>
 `;
 
 exports[`DetailsDialog renders with: {"isDevToolsOpen": false, "shadowDialog": false}: verify close button for non shadow dom 1`] = `<CancelIcon />`;
@@ -1706,7 +1706,7 @@ Object {
 `;
 
 exports[`DetailsDialog renders with: {"isDevToolsOpen": true, "shadowDialog": false} 1`] = `
-<StyledWithResponsiveMode
+<Dialog
   dialogContentProps={
     Object {
       "showCloseButton": false,
@@ -2041,7 +2041,7 @@ exports[`DetailsDialog renders with: {"isDevToolsOpen": true, "shadowDialog": fa
               "_newState": null,
               "_numberOfReRenders": 0,
               "_renderPhaseUpdates": null,
-              "_rendered": <StyledWithResponsiveMode
+              "_rendered": <Dialog
                 dialogContentProps={
                   Object {
                     "showCloseButton": false,
@@ -2228,7 +2228,7 @@ exports[`DetailsDialog renders with: {"isDevToolsOpen": true, "shadowDialog": fa
                     }
                   />
                 </div>
-              </StyledWithResponsiveMode>,
+              </Dialog>,
               "_rendering": false,
               "_updater": [Circular],
               "_workInProgressHook": null,
@@ -2255,7 +2255,7 @@ exports[`DetailsDialog renders with: {"isDevToolsOpen": true, "shadowDialog": fa
       }
     />
   </div>
-</StyledWithResponsiveMode>
+</Dialog>
 `;
 
 exports[`DetailsDialog renders with: {"isDevToolsOpen": true, "shadowDialog": false}: verify close button for non shadow dom 1`] = `<CancelIcon />`;

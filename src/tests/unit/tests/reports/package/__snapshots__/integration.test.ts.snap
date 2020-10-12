@@ -244,7 +244,7 @@ exports[`report package integration with issues 1`] = `
       event.preventDefault();
     }
   });
-})("new-tab-link-with-confirmation-dialog__1", document, confirm);
+})("new-tab-link-with-confirmation-dialog__0", document, confirm);
         </script>
       </div>
     </div>
@@ -431,7 +431,7 @@ exports[`report package integration with issues 1`] = `
       event.preventDefault();
     }
   });
-})("new-tab-link-with-confirmation-dialog__2", document, confirm);
+})("new-tab-link-with-confirmation-dialog__1", document, confirm);
               </script>
             </span>
           </li>
@@ -7263,7 +7263,7 @@ exports[`report package integration with no issues 1`] = `
       event.preventDefault();
     }
   });
-})("new-tab-link-with-confirmation-dialog__3", document, confirm);
+})("new-tab-link-with-confirmation-dialog__2", document, confirm);
         </script>
       </div>
     </div>
@@ -7450,7 +7450,7 @@ exports[`report package integration with no issues 1`] = `
       event.preventDefault();
     }
   });
-})("new-tab-link-with-confirmation-dialog__4", document, confirm);
+})("new-tab-link-with-confirmation-dialog__3", document, confirm);
               </script>
             </span>
           </li>
