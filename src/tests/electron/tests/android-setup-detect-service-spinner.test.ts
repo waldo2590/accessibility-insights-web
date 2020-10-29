@@ -11,7 +11,7 @@ import {
     simulateServiceNotInstalled,
 } from '../../miscellaneous/mock-adb/setup-mock-adb';
 
-describe('Android setup - detect-service', () => {
+describe.skip('Android setup - detect-service', () => {
     const defaultDeviceConfig = commonAdbConfigs['single-device'];
     let app: AppController;
 
